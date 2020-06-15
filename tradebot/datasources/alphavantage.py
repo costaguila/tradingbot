@@ -2,7 +2,6 @@ import os
 import requests
 from decimal import Decimal
 from datetime import datetime
-from tradebot.market.stock import Stock
 from tradebot.datasources.abstract import AbstractAdapter
 
 class AlphavantageAdapter(AbstractAdapter):
@@ -41,12 +40,14 @@ class AlphavantageAdapter(AbstractAdapter):
                 volume = Decimal(data[result_key][item]['5. volume'])
 
                 try:
-                    datetime_obj = datetime.strptime(item, '%Y-%m-%d %H:%M:%S')
+                    date = item.split(' ')[0]
+                    time = item.split(' ')[1]
                 except:
-                    datetime_obj = datetime.strptime(item, '%Y-%m-%d')
+                    date = item
+                    time = '00:00:00'
 
-                result.append(Stock(open=open,high=high,low=low, close=close,
-                    volume=volume, date_time=datetime_obj))
+                result.append({'open':open,'high':high,'low':low, 'close':close,
+                    'volume':volume, 'date':date, 'time':time})
         else:
             result = []
 
