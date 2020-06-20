@@ -1,6 +1,8 @@
 from datetime import datetime
 class AbstractTradebot:
-
+    OPERACAO_COMPRA = 'COMPRA'
+    OPERACAO_VENDA = 'VENDA'
+    OPERACAO_MANTER = 'MANTER'
     def __init__(self):
         pass
 

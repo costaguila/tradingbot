@@ -19,4 +19,5 @@ class StockList:
         self.dataframe = pd.DataFrame(stock_list)
 
     def add(self, stock):
-        self.dataframe.append(stock, ignore_index=True)
+         data = self.dataframe.append(stock, ignore_index=True)
+         self.dataframe = data
